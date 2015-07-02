@@ -1,0 +1,11 @@
+{
+  "name": "jessy",
+  "version": "1.0.0",
+  "description": "Jessy is a code editor for algorithims and portugol stuff",
+  "main": "editor.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Paulo Pires",
+  "license": "MIT"
+}
