@@ -4,6 +4,7 @@
   "description": "Jessy is a code editor for algorithims and portugol stuff",
   "main": "server.js",
   "scripts": {
+    "start": "nodemon server && webpack -w",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "author": "Paulo Pires",
@@ -11,6 +12,7 @@
   "dependencies": {
     "codemirror": "^5.4.0",
     "express": "^4.13.0",
+    "jspt": "0.0.1-alpha",
     "react": "^0.13.3",
     "react-codemirror": "^0.1.2",
     "socket.io": "^1.3.5"

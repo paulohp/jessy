@@ -48,24 +48,27 @@
 
 	var React = __webpack_require__(1);
 	var Codemirror = __webpack_require__(157);
-
+	var socket = io.connect();
 	var App = React.createClass({
 		displayName: 'App',
 
 		getInitialState: function getInitialState() {
 			return {
-				code: 'import'
+				code: '//Start codiging here..'
 			};
 		},
 		updateCode: function updateCode(newCode) {
+			socket.emit('newCode', newCode, function (err) {
+				if (err) return console.error('New comment error:', err);
+			});
+
 			this.setState({
 				code: newCode
 			});
 		},
 		render: function render() {
 			var options = {
-				lineNumbers: true,
-				mode: 'javascript'
+				lineNumbers: true
 			};
 			return React.createElement(Codemirror, { value: this.state.code, onChange: this.updateCode, options: options });
 		}
