@@ -17,6 +17,7 @@ io.on('connection', function (socket) {
   console.log('New client connected!');
 
 	socket.on('newCode', function (code, callback) {
-    callback(jspt.compile(code));
+    var log = jspt.compile(code);
+    callback(log);
 	});
 });
