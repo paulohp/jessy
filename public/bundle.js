@@ -58,19 +58,31 @@
 			};
 		},
 		updateCode: function updateCode(newCode) {
-			socket.emit('newCode', newCode, function (err) {
-				if (err) return console.error('New comment error:', err);
+			var result;
+			socket.emit('newCode', newCode, function (err, code) {
+				if (err) {
+					result = err;
+					return console.error('New comment error:', err);
+				}
+
+				result = code;
 			});
 
 			this.setState({
-				code: newCode
+				code: newCode,
+				result: result
 			});
 		},
 		render: function render() {
 			var options = {
 				lineNumbers: true
 			};
-			return React.createElement(Codemirror, { value: this.state.code, onChange: this.updateCode, options: options });
+			return React.createElement(
+				'div',
+				null,
+				React.createElement(Codemirror, { value: this.state.code, onChange: this.updateCode, options: options }),
+				React.createElement(Result, { value: this.state.result })
+			);
 		}
 	});
 
