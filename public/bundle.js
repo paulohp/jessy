@@ -53,16 +53,12 @@
 	var Result = React.createClass({
 		displayName: 'Result',
 
-		getInitialState: function getInitialState() {
-			return {
-				result: '//Start codiging there..'
-			};
-		},
 		render: function render() {
 			return React.createElement(
 				'div',
-				null,
-				this.state.result
+				{ className: 'result' },
+				this.props.result,
+				this.props.error
 			);
 		}
 	});
@@ -76,19 +72,16 @@
 			};
 		},
 		updateCode: function updateCode(newCode) {
-			var result;
+			var self = this;
 			socket.emit('newCode', newCode, function (err, code) {
 				if (err) {
-					result = err;
-					return console.error('New comment error:', err);
+					self.setState({ error: err });
 				}
-
-				result = code;
+				self.setState({ result: code });
 			});
 
 			this.setState({
-				code: newCode,
-				result: result
+				code: newCode
 			});
 		},
 		render: function render() {
@@ -99,7 +92,7 @@
 				'div',
 				null,
 				React.createElement(Codemirror, { value: this.state.code, onChange: this.updateCode, options: options }),
-				React.createElement(Result, { value: this.state.result })
+				React.createElement(Result, { error: this.state.error, result: this.state.result, update: this.updateCode })
 			);
 		}
 	});

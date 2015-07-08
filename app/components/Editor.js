@@ -3,15 +3,11 @@ var Codemirror = require('react-codemirror');
 var socket = io.connect();
 
 var Result = React.createClass({
-  getInitialState () {
-		return {
-			result: '//Start codiging there..'
-		};
-	},
   render () {
     return (
-			<div>
-				{this.state.result}
+			<div className="result">
+				{this.props.result}
+        {this.props.error}
 			</div>
 			);
   }
@@ -25,19 +21,16 @@ var App = React.createClass({
 		};
 	},
 	updateCode (newCode) {
-		var result;
+    var self = this;
     socket.emit('newCode', newCode, function (err, code) {
 			if (err){
-				result = err;
-				return console.error('New comment error:', err);
+				self.setState({error: err})
 			}
-
-			result = code
+      self.setState({result: code})
 		});
 
 		this.setState({
-			code: newCode,
-			result: result
+			code: newCode
 		});
 	},
 	render () {
@@ -47,7 +40,7 @@ var App = React.createClass({
 		return (
 			<div>
 				<Codemirror value={this.state.code} onChange={this.updateCode} options={options} />
-				<Result value={this.state.result} />
+				<Result error={this.state.error} result={this.state.result} update={this.updateCode} />
 			</div>
 			);
 	}
