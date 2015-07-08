@@ -1,6 +1,23 @@
 var React = require('react');
 var Codemirror = require('react-codemirror');
 var socket = io.connect();
+
+var Result = React.createClass({
+  getInitialState () {
+		return {
+			result: '//Start codiging there..'
+		};
+	},
+  render () {
+    return (
+			<div>
+				{this.state.result}
+			</div>
+			);
+  }
+});
+
+
 var App = React.createClass({
 	getInitialState () {
 		return {

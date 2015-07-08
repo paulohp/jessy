@@ -49,6 +49,24 @@
 	var React = __webpack_require__(1);
 	var Codemirror = __webpack_require__(157);
 	var socket = io.connect();
+
+	var Result = React.createClass({
+		displayName: 'Result',
+
+		getInitialState: function getInitialState() {
+			return {
+				result: '//Start codiging there..'
+			};
+		},
+		render: function render() {
+			return React.createElement(
+				'div',
+				null,
+				this.state.result
+			);
+		}
+	});
+
 	var App = React.createClass({
 		displayName: 'App',
 
