@@ -53,7 +53,6 @@ label {
 
 .ReactCodeMirror {
   border: 1px solid #ccc;
-  max-width: 50%;
   height: 100%;
   max-height: 100%;
 }

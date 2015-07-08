@@ -19,7 +19,7 @@ io.on('connection', function (socket) {
 	socket.on('newCode', function (code, callback) {
     setTimeout(function(){
       try {
-        var result = jspt.compile(code);
+        var result = jspt.execute(code);
       } catch (e) {
         return callback(e.message, null);
       }

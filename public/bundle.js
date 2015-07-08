@@ -56,9 +56,13 @@
 		render: function render() {
 			return React.createElement(
 				'div',
-				{ className: 'result' },
+				{ className: 'col-md-6' },
 				this.props.result,
-				this.props.error
+				React.createElement(
+					'div',
+					{ className: 'alert alert-danger' },
+					this.props.error
+				)
 			);
 		}
 	});
@@ -90,8 +94,12 @@
 			};
 			return React.createElement(
 				'div',
-				null,
-				React.createElement(Codemirror, { value: this.state.code, onChange: this.updateCode, options: options }),
+				{ className: 'row' },
+				React.createElement(
+					'div',
+					{ className: 'col-md-6' },
+					React.createElement(Codemirror, { value: this.state.code, onChange: this.updateCode, options: options })
+				),
 				React.createElement(Result, { error: this.state.error, result: this.state.result, update: this.updateCode })
 			);
 		}

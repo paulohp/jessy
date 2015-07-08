@@ -5,9 +5,9 @@ var socket = io.connect();
 var Result = React.createClass({
   render () {
     return (
-			<div className="result">
+			<div className="col-md-6">
 				{this.props.result}
-        {this.props.error}
+        <div className="alert alert-danger">{this.props.error}</div>
 			</div>
 			);
   }
@@ -38,8 +38,10 @@ var App = React.createClass({
 			lineNumbers: true
 		};
 		return (
-			<div>
+			<div className="row">
+        <div className="col-md-6">
 				<Codemirror value={this.state.code} onChange={this.updateCode} options={options} />
+        </div>
 				<Result error={this.state.error} result={this.state.result} update={this.updateCode} />
 			</div>
 			);
