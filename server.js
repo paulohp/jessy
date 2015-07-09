@@ -14,15 +14,29 @@ console.log('Server listening on port 3000');
 var io = require('socket.io')(server);
 
 io.on('connection', function (socket) {
-  console.log('New client connected!');
 
 	socket.on('newCode', function (code, callback) {
+    var fileName = path.resolve('./tmp/', socket.id+'.alg');
     setTimeout(function(){
-      try {
-        var result = jspt.execute(code);
-      } catch (e) {
-        return callback(e.message, null);
-      }
-    }, 500);
+      fs.writeFileSync(fileName, code);
+      openFile(fileName, function (data) {
+        try {
+          var result = jspt.execute(data);
+        } catch (e) {
+          return callback(e.message, null);
+        }
+      });
+    }, 700)
 	});
 });
+
+
+function openFile(file, fn) {
+  fs.readFile(file, function(error, data) {
+      if (error) {
+          throw new Error(error);
+      }
+
+      fn(data.toString('utf8'));
+  });
+}
