@@ -21,7 +21,8 @@ io.on('connection', function (socket) {
       fs.writeFileSync(fileName, code);
       openFile(fileName, function (data) {
         try {
-          var result = jspt.execute(data);
+          var result = jspt.execute(data, createContext());
+          return callback(null, result)
         } catch (e) {
           return callback(e.message, null);
         }
@@ -29,6 +30,10 @@ io.on('connection', function (socket) {
     }, 700)
 	});
 });
+
+function createContext() {
+  return require('./lib/modules/std').module;
+}
 
 
 function openFile(file, fn) {

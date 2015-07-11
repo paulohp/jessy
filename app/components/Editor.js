@@ -26,6 +26,7 @@ var App = React.createClass({
 			if (err){
 				self.setState({error: err})
 			}
+      console.log("CODER", code);
       self.setState({result: code})
 		});
 
