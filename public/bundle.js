@@ -79,10 +79,13 @@
 			var self = this;
 			socket.emit('newCode', newCode, function (err, code) {
 				if (err) {
-					self.setState({ error: err });
+					self.setState({
+						error: err
+					});
 				}
-				console.log('CODER', code);
-				self.setState({ result: code });
+				self.setState({
+					result: code
+				});
 			});
 
 			this.setState({
